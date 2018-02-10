@@ -118,13 +118,13 @@ class TaxCalculatorTest extends TestCase
     public function testOk()
     {
         $total = $this->calculator
-            ->addEdge(new Edge(0, 50, 5))
-            ->addEdge(new Edge(50, 250, 15))
-            ->addEdge(new Edge(250, 500, 25))
-            ->addEdge(new Edge(null, 500, 30))
-            ->getTax(750)
+            ->addEdge(new Edge(0, 50000000, 5))
+            ->addEdge(new Edge(50000000, 250000000, 15))
+            ->addEdge(new Edge(250000000, 500000000, 25))
+            ->addEdge(new Edge(null, 500000000, 30))
+            ->getTax(75000000)
         ;
 
-        $this->assertEquals(170, $total);
+        $this->assertEquals(6250000, $total);
     }
 }

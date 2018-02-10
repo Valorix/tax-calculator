@@ -84,10 +84,14 @@ class TaxCalculator
         foreach ($this->edges as $edge) {
             if (!is_null($edge->getFrom())) {
                 if ($value > $edge->getTo() || ($value >= $edge->getFrom() && $value <= $edge->getTo())) {
-                    $tax += ($edge->getTax() / 100) * ($value < $edge->getTo() ? $value : $edge->getTo() - $edge->getFrom());
+                    $taxable = $value < $edge->getTo() ? $value - $edge->getFrom() : $edge->getTo() - $edge->getFrom();
+                    $total = ($edge->getTax() / 100) * $taxable;
+                    $tax += $total;
                 }
             } elseif ($value > $edge->getTo()) {
-                $tax += ($edge->getTax() / 100) * ($value - $edge->getTo());
+                $taxable = $value - $edge->getTo();
+                $total = ($edge->getTax() / 100) * $taxable;
+                $tax += $total;
             }
         }
 
